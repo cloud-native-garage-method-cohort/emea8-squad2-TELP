@@ -1,0 +1,19 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: emea8-squad2-telp-
+spec:
+  pipelineRef:
+    name: emea8-squad2-telp
+  workspaces:
+    - name: pipeline-shared-data
+      volumeClaimTemplate:
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 1Gi
+  params:
+    - name: source-repo-url
+      value: https://github.com/cloud-native-garage-method-cohort/emea8-squad2-TELP

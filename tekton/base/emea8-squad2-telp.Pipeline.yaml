@@ -1,0 +1,26 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+
+metadata:
+  name: emea8-squad2-telp
+
+spec:
+  workspaces:
+    - name: pipeline-shared-data
+
+  params:
+    - name: source-repo-url
+      type: string
+      description: GitHub repository url
+
+  tasks:
+    - name: clone-source-repo
+      taskRef:
+        name: git-clone
+        kind: ClusterTask
+      params:
+        - name: url
+          value: $(params.source-repo-url)
+      workspaces:
+        - name: output
+          workspace: pipeline-shared-data
