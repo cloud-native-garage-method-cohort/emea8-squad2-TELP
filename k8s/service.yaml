@@ -8,8 +8,5 @@ spec:
     app.kubernetes.io/instance: app-instance
     app.kubernetes.io/name: app
   ports:
-  - name: http
-    protocol: TCP
-    port: 80
-    targetPort: 80
-  sessionAffinity: None
+    - port: 80
+      targetPort: 80

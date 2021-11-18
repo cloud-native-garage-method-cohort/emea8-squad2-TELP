@@ -3,10 +3,6 @@ kind: Route
 metadata:
   name: emea8-squad2-telp
 spec:
-  tls:
-    termination: edge
   to:
     name: emea8-squad2-telp
     kind: Service
-    weight: 100
-  wildcardPolicy: None
