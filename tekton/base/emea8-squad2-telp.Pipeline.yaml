@@ -15,15 +15,26 @@ spec:
     - name: tests-path
       type: string
       description: Relative path to the tests folder
+    - name: docker-image
+      type: string
+      description: Name of the docker image (without tag)
+    - name: dockerfile
+      type: string
+      description: Path to dockerfile
+    - name: dockercontext
+      type: string
+      description: Path to docker context
 
   tasks:
     - name: clone-source-repo
       taskRef:
         name: git-clone
         kind: ClusterTask
+
       params:
         - name: url
           value: $(params.source-repo-url)
+
       workspaces:
         - name: output
           workspace: pipeline-shared-data
@@ -41,6 +52,23 @@ spec:
           value: "-rfs"
         - name: SOURCE_PATH
           value: $(params.tests-path)
+      workspaces:
+        - name: source
+          workspace: pipeline-shared-data
+
+    - name: create-image
+      taskRef:
+        name: buildah
+        kind: ClusterTask
+      runAfter:
+        - run-tests
+      params:
+        - name: IMAGE
+          value: "$(params.docker-image):$(tasks.clone-source-repo.results.commit)"
+        - name: DOCKERFILE
+          value: $(params.dockerfile)
+        - name: CONTEXT
+          value: $(params.dockercontext)
       workspaces:
         - name: source
           workspace: pipeline-shared-data
