@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: telp-app
+  name: emea8-squad2-telp
 spec:
   type: ClusterIP
   selector:

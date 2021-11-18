@@ -1,12 +1,12 @@
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
-  name: next-js-app
+  name: emea8-squad2-telp
 spec:
   tls:
     termination: edge
   to:
-    name: next-js-app
+    name: emea8-squad2-telp
     kind: Service
     weight: 100
   wildcardPolicy: None
