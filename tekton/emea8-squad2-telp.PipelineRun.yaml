@@ -5,6 +5,7 @@ metadata:
 spec:
   pipelineRef:
     name: emea8-squad2-telp
+
   workspaces:
     - name: pipeline-shared-data
       volumeClaimTemplate:
@@ -14,6 +15,9 @@ spec:
           resources:
             requests:
               storage: 1Gi
+
   params:
     - name: source-repo-url
       value: https://github.com/cloud-native-garage-method-cohort/emea8-squad2-TELP
+    - name: tests-path
+      value: ./tests

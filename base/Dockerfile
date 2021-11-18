@@ -1,1 +1,1 @@
-FROM tiangolo/uvicorn-gunicorn-fastapi
+FROM tiangolo/uvicorn-gunicorn-fastapi:python3.9

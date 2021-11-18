@@ -12,6 +12,9 @@ spec:
     - name: source-repo-url
       type: string
       description: GitHub repository url
+    - name: tests-path
+      type: string
+      description: Relative path to the tests folder
 
   tasks:
     - name: clone-source-repo
@@ -23,4 +26,21 @@ spec:
           value: $(params.source-repo-url)
       workspaces:
         - name: output
+          workspace: pipeline-shared-data
+
+    - name: run-tests
+      taskRef:
+        name: pytest
+        kind: Task
+      runAfter:
+        - clone-source-repo
+      params:
+        - name: PYTHON
+          value: "3.9"
+        - name: ARGS
+          value: "-rfs"
+        - name: SOURCE_PATH
+          value: $(params.tests-path)
+      workspaces:
+        - name: source
           workspace: pipeline-shared-data
