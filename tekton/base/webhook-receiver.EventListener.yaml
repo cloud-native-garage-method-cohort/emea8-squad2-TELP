@@ -21,18 +21,11 @@ spec:
       metadata:
         generateName: emea8-squad2-telp-
       spec:
-        serviceAccountName: build-bot
-        params:
-          - name: app-name
-            value: emea8-squad2-telp
-          - name: source-repo
-            value: $(tt.params.source-repo)
-          - name: sha
-            value: $(tt.params.sha)
-          - name: image-repo
-            value: quay.io/pbworker/telp-app
         pipelineRef:
-          name: quay.io/pbworker/telp-app
+          name: emea8-squad2-telp
+
+        serviceAccountName: build-bot
+
         workspaces:
           - name: pipeline-shared-data
             volumeClaimTemplate:
@@ -52,7 +45,22 @@ spec:
                   - ReadWriteOnce
           - name: git-credentials
             secret:
-              secretName: quay-io-credentials
+              secretName: git-credentials
+
+        params:
+          - name: source-repo-url
+            value: https://github.com/cloud-native-garage-method-cohort/emea8-squad2-TELP
+          - name: tests-path
+            value: ./tests
+          - name: docker-image
+            value: quay.io/pbworker/telp-app
+          - name: dockerfile
+            value: ./app/Dockerfile
+          - name: dockercontext
+            value: ./app
+          - name: app-name
+            value: emea8-squad2-telp
+
 ---
 apiVersion: triggers.tekton.dev/v1alpha1
 kind: TriggerBinding
