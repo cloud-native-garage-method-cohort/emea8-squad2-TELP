@@ -7,6 +7,8 @@ metadata:
 spec:
   workspaces:
     - name: pipeline-shared-data
+    - name: gitops-repository
+    - name: git-credentials
 
   params:
     - name: source-repo-url
@@ -93,3 +95,37 @@ spec:
       workspaces:
         - name: source
           workspace: pipeline-shared-data
+
+    - name: deploy
+      taskRef:
+        name: deploy
+      runAfter:
+        - create-configuration
+      params:
+        - name: manifest
+          value: "$(tasks.create-configuration.results.manifest)"
+        - name: app-namespace
+          value: "$(context.pipelineRun.namespace)"
+      workspaces:
+        - name: source
+          workspace: pipeline-shared-data
+
+    - name: save-configuration
+      params:
+        - name: manifest
+          value: "$(tasks.create-configuration.results.manifest)"
+        - name: app-name
+          value: "$(params.app-name)"
+        - name: sha
+          value: "$(tasks.clone-source-repo.results.commit)"
+      runAfter:
+        - deploy
+      taskRef:
+        name: save-configuration
+      workspaces:
+        - name: source
+          workspace: pipeline-shared-data
+        - name: target
+          workspace: gitops-repository
+        - name: git-credentials
+          workspace: git-credentials
