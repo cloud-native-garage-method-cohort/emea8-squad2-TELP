@@ -7,6 +7,8 @@ metadata:
 spec:
   workspaces:
     - name: pipeline-shared-data
+    - name: gitops-repository
+    - name: git-credentials
 
   params:
     - name: source-repo-url
@@ -24,6 +26,9 @@ spec:
     - name: dockercontext
       type: string
       description: Path to docker context
+    - name: app-name
+      type: string
+      description: Name of the application
 
   tasks:
     - name: clone-source-repo
@@ -72,3 +77,55 @@ spec:
       workspaces:
         - name: source
           workspace: pipeline-shared-data
+
+    - name: create-configuration
+      taskRef:
+        name: create-configuration
+      runAfter:
+        - create-image
+      params:
+        - name: app-name
+          value: "$(params.app-name)"
+        - name: source-repo
+          value: "$(params.source-repo-url)"
+        - name: commit
+          value: "$(tasks.clone-source-repo.results.commit)"
+        - name: image-repo
+          value: "$(params.docker-image)"
+      workspaces:
+        - name: source
+          workspace: pipeline-shared-data
+
+    - name: deploy
+      taskRef:
+        name: deploy
+      runAfter:
+        - create-configuration
+      params:
+        - name: manifest
+          value: "$(tasks.create-configuration.results.manifest)"
+        - name: app-namespace
+          value: "$(context.pipelineRun.namespace)"
+      workspaces:
+        - name: source
+          workspace: pipeline-shared-data
+
+    - name: save-configuration
+      params:
+        - name: manifest
+          value: "$(tasks.create-configuration.results.manifest)"
+        - name: app-name
+          value: "$(params.app-name)"
+        - name: sha
+          value: "$(tasks.clone-source-repo.results.commit)"
+      runAfter:
+        - deploy
+      taskRef:
+        name: save-configuration
+      workspaces:
+        - name: source
+          workspace: pipeline-shared-data
+        - name: target
+          workspace: gitops-repository
+        - name: git-credentials
+          workspace: git-credentials

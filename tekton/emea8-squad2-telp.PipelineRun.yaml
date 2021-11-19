@@ -17,6 +17,17 @@ spec:
           resources:
             requests:
               storage: 1Gi
+    - name: gitops-repository
+      volumeClaimTemplate:
+        spec:
+          resources:
+            requests:
+              storage: 1Gi
+          accessModes:
+            - ReadWriteOnce
+    - name: git-credentials
+      secret:
+        secretName: git-credentials
 
   params:
     - name: source-repo-url
@@ -29,3 +40,5 @@ spec:
       value: ./app/Dockerfile
     - name: dockercontext
       value: ./app
+    - name: app-name
+      value: emea8-squad2-telp
