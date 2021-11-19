@@ -1,4 +1,4 @@
-FROM quay.io/pbworker/python:3.7
+FROM quay.io/pbworker/python:3.7ski
 
 RUN pip install virtualenv
 ENV VIRTUAL_ENV=/venv
@@ -16,8 +16,8 @@ RUN mkdir -p /app/upload-mysql-data
 RUN mkdir -p /app/app_csvs
 
 # Install dependencies
-ADD requirements.txt /app
-RUN pip install -r requirements.txt
+# ADD requirements.txt /app
+# RUN pip install -r requirements.txt
 
 ADD app.py /app
 ADD templates /app/templates
