@@ -24,6 +24,9 @@ spec:
     - name: dockercontext
       type: string
       description: Path to docker context
+    - name: app-name
+      type: string
+      description: Name of the application
 
   tasks:
     - name: clone-source-repo
@@ -69,6 +72,24 @@ spec:
           value: $(params.dockerfile)
         - name: CONTEXT
           value: $(params.dockercontext)
+      workspaces:
+        - name: source
+          workspace: pipeline-shared-data
+
+    - name: create-configuration
+      taskRef:
+        name: create-configuration
+      runAfter:
+        - create-image
+      params:
+        - name: app-name
+          value: "$(params.app-name)"
+        - name: source-repo
+          value: "$(params.source-repo-url)"
+        - name: commit
+          value: "$(tasks.clone-source-repo.results.commit)"
+        - name: image-repo
+          value: "$(params.docker-image)"
       workspaces:
         - name: source
           workspace: pipeline-shared-data
