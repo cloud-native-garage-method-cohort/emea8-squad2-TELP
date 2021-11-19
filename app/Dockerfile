@@ -1,4 +1,4 @@
-FROM python:latest
+FROM quay.io/pbworker/python:3.7
 
 RUN pip install virtualenv
 ENV VIRTUAL_ENV=/venv
