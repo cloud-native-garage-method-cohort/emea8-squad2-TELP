@@ -15,22 +15,21 @@ RUN mkdir -p /app/static
 RUN mkdir -p /app/upload-mysql-data
 RUN mkdir -p /app/app_csvs
 
-ADD Dockerfile /app
-ADD app.py /app
+# Install dependencies
 ADD requirements.txt /app
+RUN pip install -r requirements.txt
+
+ADD app.py /app
 ADD templates /app/templates
 ADD static /app/static
 ADD app_csvs /app/app_csvs
 ADD upload-mysql-data /app/upload-mysql-data
 
-# Install dependencies
-RUN pip install -r requirements.txt
-
 # copying all files over
 #COPY . /app
 
 # Expose port
-ENV PORT 8501
+ENV PORT 5000
 
 # cmd to launch app when container is run
 CMD python app.py
