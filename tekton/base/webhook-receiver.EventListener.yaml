@@ -52,7 +52,7 @@ spec:
                   - ReadWriteOnce
           - name: git-credentials
             secret:
-              secretName: git-credentials
+              secretName: quay-io-credentials
 ---
 apiVersion: triggers.tekton.dev/v1alpha1
 kind: TriggerBinding
