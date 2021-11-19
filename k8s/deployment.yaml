@@ -4,7 +4,7 @@ metadata:
   name: emea8-squad2-telp
   annotations:
     app.openshift.io/vcs-uri: https://github.com/cloud-native-garage-method-cohort/emea8-squad2-TELP
-    app.openshift.io/vcs-ref: 3e007beb70ae1b16c078a7ace1e0a5961e20a7d5
+    app.openshift.io/vcs-ref: 7b2a66e9427097c07d2465554b770ae16c2da505
 spec:
   selector:
     matchLabels:
@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: emea8-squad2-telp
-          image: quay.io/pbworker/telp-app:3e007beb70ae1b16c078a7ace1e0a5961e20a7d5
+          image: quay.io/pbworker/telp-app:7b2a66e9427097c07d2465554b770ae16c2da505
           resources:
             limits:
               memory: "128Mi"

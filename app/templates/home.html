@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Movie Predictor</title>
+
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/template.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='fonts/material-design-iconic-font/css/material-design-iconic-font.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  </head>
+  <body>
+    <div class="wrapper">
+        <div class="image-holder">
+            <img src={{ url_for('static', filename="images/image_4.png") }} alt="">
+        </div>
+
+            <div id="wizard">
+              <div class="form-row">
+                <h1>IBMFlix</h1>
+              </div>
+
+              <div class="form-holder">
+                <label for="interaction">Have we met before?</label>
+                  <select name="interactionval" id="interaction" onchange="showForm()" class="form-control">
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                    <option value="Not Sure">Not Sure</option>
+                  </select>
+
+              </div>
+              <br />
+
+              <div class="form-row">
+                <h3>Tell us your name!</h3>
+              </div>
+
+              <div class="form-holder">
+                <section id="existingUserForm" style="display:block;">
+                  <form action="{{ url_for('handleDataExistingUser') }}" method="POST">
+                    <label for="exfirstname">First name:</label>
+                    <input name="firstnameval" id="exfirstname" class="form-control">
+                    <br /><br />
+                    <label for="exlastname">Last name:</label>
+                    <input name="lastnameval" id="exlastname" class="form-control">
+                    <br /><br />
+                    <button type="submit" class="btn_submit">Submit</button>
+                  </form>
+                </section>
+              </div>
+
+              <div class="form-holder">
+              <section id="newUserForm" style="display:none;">
+                <form action="{{ url_for('handleDataNewUser') }}" method="POST">
+                  <label for="newfirstname">First name:</label>
+                  <input name="firstnameval" id="newfirstname" class="form-control">
+                  <br /><br />
+                  <label for="newlastname">Last name:</label>
+                  <input name="lastnameval" id="newlastname" class="form-control">
+                  <br /><br />
+                  <label for="newmovie">What movie did you watch?</label>
+                  <input name="movieval" id="newmovie" class="form-control">
+                  <br /><br />
+                  <button type="submit" class="btn_submit">Submit</button>
+                </form>
+              </section>
+              </div>
+              
+              <br />
+              <p style="color:red;">{{ error_message }}</p>
+    </div>
+
+    <script>
+      var interaction = document.getElementById("interaction");
+      if (interaction.value === "Yes") {
+          existingUserForm.style.display = "block";
+          newUserForm.style.display = "none";
+        } else {
+          existingUserForm.style.display = "none";
+          newUserForm.style.display = "block";
+        }
+
+      function showForm() {
+        var interaction = document.getElementById("interaction");
+        var existingUserForm = document.getElementById("existingUserForm");
+        var newUserForm = document.getElementById("newUserForm");
+        if (interaction.value === "Yes") {
+          existingUserForm.style.display = "block";
+          newUserForm.style.display = "none";
+        } else {
+          existingUserForm.style.display = "none";
+          newUserForm.style.display = "block";
+        }
+      }
+    </script>
+
+    <script src={{ url_for('static', filename="js/main.js") }}></script>
+    <script src={{ url_for('static', filename="js/jquery-3.3.1.min.js") }}></script>
+
+  </body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>FormWizard_v5</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="author" content="colorlib.com">
+
+		<!-- MATERIAL DESIGN ICONIC FONT -->
+        <link rel="stylesheet" href={{ url_for('static', filename='fonts/material-design-iconic-font/css/material-design-iconic-font.css') }}>
+
+		<!-- STYLE CSS -->
+		<link rel="stylesheet" href={{ url_for('static', filename='css/style.css') }}>
+
+
+	</head>
+	<body>
+		<div class="wrapper">
+			<div class="image-holder">
+				<img src={{ url_for('static', filename="images/image_4.png") }} alt="">
+			</div>
+            <form action="">
+            	<div id="wizard">
+            		<!-- SECTION 1 -->
+	                <h4></h4>
+	                <section>
+	                    <div class="form-row form-group">
+	                    	<div class="form-holder">
+	                    		<label for="">
+	                    		First Name *
+		                    	</label>
+	                    		<input type="text" class="form-control" required>
+	                    	</div>
+	                    	<div class="form-holder">
+	                    		<label for="">
+	                    		Last Name *
+		                    	</label>
+	                    		<input type="text" class="form-control">
+	                    	</div>
+	                    </div>
+	                    <div class="form-row">
+	                    	<label for="">
+	                    		Have we met before?
+	                    	</label>
+	                    	<div class="form-holder">
+	                    		<select name="" id="interaction_id" class="form-control">
+									<option value="yes" class="option">Yes</option>
+									<option value="no" class="option">No</option>
+									<option value="not_sure" class="option">Not Sure</option>
+								</select>
+								<i class="zmdi zmdi-caret-down"></i>
+	                    	</div>
+	                    </div>
+	                </section>
+
+	                <!-- SECTION  2-->
+	                <h4></h4>
+	                <section>
+						<div class="form-row">
+	                    	<label for="">
+	                    		Type the title
+	                    	</label>
+	                    	<div class="form-holder">
+<!--	                    		<select name="" id="" class="form-control">-->
+<!--									<option value="viet nam" class="option">007</option>-->
+<!--									<option value="united states" class="option">American Pie 3</option>-->
+<!--									<option value="united kingdom" class="option">Pulp Fiction</option>-->
+<!--								</select>-->
+								<input type="text" list="favorite_movie" class="form-control"/>
+									<datalist id="favorite_movie">
+									<option value="007" class="option"></option>
+									<option value="American Pie 3" class="option"></option>
+									<option value="Pulp Fiction" class="option"></option>
+									</datalist>
+	                    	</div>
+	                    </div>
+	                </section>
+                <!-- SECTION 3 -->
+
+	                <h4></h4>
+	                <section>
+	                    <div class="product">
+	                    	<div class="item">
+	                    		<div class="left">
+	                    			<a href="#" class="thumb">
+		                    			<img src="https://images-na.ssl-images-amazon.com/images/M/MV5BMzk2OTg4MTk1NF5BMl5BanBnXkFtZTcwNjExNTgzNA@@..jpg" alt="">
+		                    		</a>
+		                    		<div class="purchase">
+		                    			<h6>
+		                    				<a href="#">007 GoldenEye</a>
+		                    			</h6>
+		                    		</div>
+	                    		</div>
+	                    	</div>
+	                    	<div class="item">
+	                    		<div class="left">
+	                    			<a href="#" class="thumb">
+		                    			<img src="https://images-na.ssl-images-amazon.com/images/M/MV5BMjAwODYzNDY4Ml5BMl5BanBnXkFtZTcwODkwNTgzNA@@..jpg" alt="">
+		                    		</a>
+		                    		<div class="purchase">
+		                    			<h6>
+		                    				<a href="#">Get Shorty</a>
+		                    			</h6>
+		                    		</div>
+	                    		</div>
+	                    	</div>
+							<div class="item">
+	                    		<div class="left">
+	                    			<a href="#" class="thumb">
+		                    			<img src="https://images-na.ssl-images-amazon.com/images/M/MV5BMGE1ZTQ0ZTEtZTEwZS00NWE0LTlmMDUtMTE1ZWJiZTYzZTQ2XkEyXkFqcGdeQXVyNTAyODkwOQ@@..jpg" alt="">
+		                    		</a>
+		                    		<div class="purchase">
+		                    			<h6>
+		                    				<a href="#">Bad Boys</a>
+		                    			</h6>
+		                    		</div>
+	                    		</div>
+	                    	</div>
+	                    </div>
+	                </section>
+					<!-- SECTION 4 -->
+	                <h4></h4>
+	                <section>
+	                    <div class="checkbox-circle">
+							<label class="active">
+								<input type="radio" name="recommendation rating" value="Very relevant" checked>Very relevant
+								<span class="checkmark"></span>
+							</label>
+							<label>
+								<input type="radio" name="recommendation rating" value="Not bad">Not bad
+								<span class="checkmark"></span>
+
+							</label>
+							<label>
+								<input type="radio" name="recommendation rating" value="Irrelevant">Irrelevant
+								<span class="checkmark"></span>
+							</label>
+						</div>
+						  <button type="submit" class="btn_submit">Submit</button>
+
+	                </section>
+            	</div>
+            </form>
+		</div>
+
+		<script src={{ url_for('static', filename="js/jquery-3.3.1.min.js") }}></script>
+
+		<!-- JQUERY STEP -->
+		<script src={{ url_for('static', filename="js/jquery.steps.js") }}></script>
+
+		<script src={{ url_for('static', filename="js/main.js") }}></script>
+
+<!-- Template created and distributed by Colorlib -->
+</body>
+</html>
